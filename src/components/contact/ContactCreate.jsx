@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useLocalStorage } from "react-use";
 import { createContact } from "../../lib/api/ContactApi";
-import { alertError, alertSuccess } from "../../lib/Alert";
+import { alertError, alertSuccess } from "../../lib/alert";
 
 export default function ContactCreate() {
 
@@ -40,7 +40,7 @@ export default function ContactCreate() {
     return <>
         <div>
             <div className="flex items-center mb-6">
-                <Link to="/dashboard" className="text-blue-400 hover:text-blue-300 mr-4 flex items-center transition-colors duration-200">
+                <Link to="/dashboard/contacts" className="text-blue-400 hover:text-blue-300 mr-4 flex items-center transition-colors duration-200">
                     <i className="fas fa-arrow-left mr-2" /> Back to Contacts
                 </Link>
                 <h1 className="text-2xl font-bold text-white flex items-center">

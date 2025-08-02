@@ -2,7 +2,7 @@ import { use, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { userLogin } from "../../lib/api/UserApi";
 import { useLocalStorage } from "react-use";
-import { alertError } from "../../lib/Alert";
+import { alertError } from "../../lib/alert";
 
 export default function UserLogin() {
 
@@ -24,7 +24,7 @@ export default function UserLogin() {
         if (response.status === 200) {
             setToken(responseBody.data.token)
             await navigate({
-                pathname: "/dashboard"
+                pathname: "/dashboard/contacts"
             })
         }else {
             await alertError(responseBody.errors)

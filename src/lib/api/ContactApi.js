@@ -14,3 +14,21 @@ export const createContact = async (token, contact)=>{
         })
     })
 }
+
+export const contactList = async(token, {name, phone, email, page})=>{
+    const url = new URL(`${import.meta.env.VITE_API_PATH}/contacts`)
+
+    if(name) url.searchParams.append('name', name)
+    if(phone) url.searchParams.append('phone', phone)
+    if(email) url.searchParams.append('email', email)
+    if(page) url.searchParams.append('page', page)
+
+    return fetch(url,{
+        method : "GET",
+        headers:{
+            "Content-Type" : "application/json",
+            "Accept" : "application/json",
+            "Authorization" : token,
+        }
+    })
+}

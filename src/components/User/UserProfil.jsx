@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useEffectOnce, useLocalStorage } from "react-use"
-import { userDetail, userUpdateProfile } from "../../lib/api/UserApi"
-import { alertError, alertSuccess } from "../../lib/Alert"
+import { userDetail, userUpdatePassword, userUpdateProfile } from "../../lib/api/UserApi"
+import { alertError, alertSuccess } from "../../lib/alert"
 
 export default function UserProfil() {
 
@@ -25,7 +25,7 @@ export default function UserProfil() {
 
     async function handleSubmitPassword(e){
         e.preventDefault()
-        const response = await userUpdateProfile(token, {password})
+        const response = await userUpdatePassword(token, {password})
         const responseBody = await response.json()
         console.log(responseBody)
         if(response.status === 200){

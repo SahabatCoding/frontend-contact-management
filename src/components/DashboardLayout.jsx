@@ -5,7 +5,7 @@ export default function DashboardLayout() {
         <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen flex flex-col">
             <header className="bg-gradient shadow-lg">
                 <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-                    <Link to="/dashboard" className="flex items-center hover:opacity-90 transition-opacity duration-200">
+                    <Link to="/dashboard/contacts" className="flex items-center hover:opacity-90 transition-opacity duration-200">
                         <i className="fas fa-address-book text-white text-2xl mr-3" />
                         <div className="text-white font-bold text-xl">Contact Management</div>
                     </Link>

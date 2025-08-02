@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { alertError, alertSuccess } from "../../lib/Alert"
+import { alertError, alertSuccess } from "../../lib/alert"
 import { userRegister } from "../../lib/api/UserApi"
 import { Link, useNavigate } from "react-router"
 
