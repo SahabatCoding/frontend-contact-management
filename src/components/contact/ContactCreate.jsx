@@ -10,31 +10,31 @@ export default function ContactCreate() {
     const [last_name, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
-    const [token,_] = useLocalStorage("token", "")
-    const navigate = useNavigate()
+    const [token, _] = useLocalStorage("token", "")
 
     async function handleSubmit(e) {
         e.preventDefault()
         const contact = {
-            first_name : first_name,
-            last_name : last_name,
-            email : email,
-            phone : phone
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            phone: phone
         }
 
         const response = await createContact(token, contact)
         const responseBody = await response.json()
         console.log(responseBody)
 
-        if(response.status === 200){
+        if (response.status === 200) {
+            setFirstName("")
+            setLastName("")
+            setEmail("")
+            setPhone("")
             await alertSuccess("Data berahasil diisi")
-            await navigate({
-                pathname : "/dashboard"
-            })
-        }else{
+        } else {
             await alertError(responseBody.errors)
         }
-        
+
     }
 
     return <>
@@ -57,7 +57,7 @@ export default function ContactCreate() {
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <i className="fas fa-user-tag text-gray-500" />
                                     </div>
-                                    <input type="text" id="first_name" name="first_name" className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter first name" required value={first_name} onChange={(e)=>setFirstName(e.target.value)} />
+                                    <input type="text" id="first_name" name="first_name" className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter first name" required value={first_name} onChange={(e) => setFirstName(e.target.value)} />
                                 </div>
                             </div>
                             <div>
@@ -66,7 +66,7 @@ export default function ContactCreate() {
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <i className="fas fa-user-tag text-gray-500" />
                                     </div>
-                                    <input type="text" id="last_name" name="last_name" className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter last name" value={last_name} onChange={(e)=>setLastName(e.target.value)} required />
+                                    <input type="text" id="last_name" name="last_name" className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter last name" value={last_name} onChange={(e) => setLastName(e.target.value)} required />
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@ export default function ContactCreate() {
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <i className="fas fa-envelope text-gray-500" />
                                 </div>
-                                <input type="email" id="email" name="email" className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter email address" value={email} onChange={(e)=>setEmail(e.target.value)} required />
+                                <input type="email" id="email" name="email" className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter email address" value={email} onChange={(e) => setEmail(e.target.value)} required />
                             </div>
                         </div>
                         <div className="mb-6">
@@ -85,7 +85,7 @@ export default function ContactCreate() {
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <i className="fas fa-phone text-gray-500" />
                                 </div>
-                                <input type="tel" id="phone" name="phone" className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter phone number" value={phone} onChange={(e)=>setPhone(e.target.value)} required />
+                                <input type="tel" id="phone" name="phone" className="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter phone number" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                             </div>
                         </div>
                         <div className="flex justify-end space-x-4">
