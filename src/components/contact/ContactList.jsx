@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router";
 import { useEffectOnce, useLocalStorage } from "react-use";
-import { alertError } from "../../lib/alert";
-import { contactList } from "../../lib/api/ContactApi";
+import { alertConfirm, alertError, alertSuccess } from "../../lib/alert";
+import { contactDelete, contactList } from "../../lib/api/ContactApi";
 
 export default function ContactList() {
 
@@ -35,6 +35,26 @@ export default function ContactList() {
         setReload(!reload)
     }
 
+    async function handleContactDelete(id){
+        const alert = await alertConfirm("Are you sure want to delete this contact?")
+        if(!alert){
+            return
+        }
+
+        const response = await contactDelete(token, id) 
+        const responseBody = await response.json()
+        console.log(responseBody)
+
+        if(response.status ===200){
+            await alertSuccess("Contact deleted successfully")
+            setReload(!reload)
+        }else{
+            await alertError(responseBody.errors)
+        }
+
+
+    }
+
     async function fetchContacts() {
         const response = await contactList(token, { name, phone, email, page })
         const responseBody = await response.json()
@@ -51,7 +71,7 @@ export default function ContactList() {
     useEffect(() => {
         fetchContacts()
             .then(() => console.log("Contact Fetched"))
-    }, [reload])
+    },[reload])
 
     useEffectOnce(() => {
         const toggleButton = document.getElementById('toggleSearchForm');
@@ -74,7 +94,7 @@ export default function ContactList() {
                 toggleIcon.classList.remove('fa-chevron-up');
                 toggleIcon.classList.add('fa-chevron-down');
             } else {
-                // Show the form
+                // Show the form    
                 searchFormContent.style.maxHeight = searchFormContent.scrollHeight + 'px';
                 searchFormContent.style.opacity = '1';
                 searchFormContent.style.marginTop = '1rem';
@@ -90,7 +110,6 @@ export default function ContactList() {
         }
 
     })
-
 
     return <>
         <div>
@@ -201,7 +220,8 @@ export default function ContactList() {
                                 <Link to={`/dashboard/contacts/${contact.id}/edit`} className="px-4 py-2 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center">
                                     <i className="fas fa-edit mr-2" /> Edit
                                 </Link>
-                                <button className="px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center">
+                                <button onClick={()=> handleContactDelete(contact.id)}
+                                className="px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center">
                                     <i className="fas fa-trash-alt mr-2" /> Delete
                                 </button>
                             </div>
