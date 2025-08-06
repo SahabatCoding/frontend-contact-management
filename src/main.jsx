@@ -9,6 +9,7 @@ import UserProfil from './components/User/UserProfil'
 import UserLogout from './components/User/UserLogout'
 import ContactCreate from './components/contact/ContactCreate'
 import ContactList from './components/contact/ContactList'
+import ContactEdit from './components/contact/ContactEdit'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -29,8 +30,8 @@ createRoot(document.getElementById('root')).render(
           <Route path='contacts'>
             <Route index element={<ContactList/>} />
             <Route path='create' element={<ContactCreate/>} />
+            <Route path=':id/edit' element={<ContactEdit/>} />
           </Route>
-
         </Route>
 
 
