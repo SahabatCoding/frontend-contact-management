@@ -182,7 +182,6 @@ export default function ContactList() {
                 </div>
 
                 {/* Contact Card*/}
-
                 {conatcts.map(contact => (
                     <div key={contact.id} className="bg-gray-800 bg-opacity-80 rounded-xl shadow-custom border border-gray-700 overflow-hidden card-hover animate-fade-in">
                         <div className="p-6">

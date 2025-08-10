@@ -34,7 +34,6 @@ export default function ContactCreate() {
         } else {
             await alertError(responseBody.errors)
         }
-
     }
 
     return <>
