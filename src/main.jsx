@@ -19,10 +19,10 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
 
-        <Route element={<Layout />}>
+        <Route path='/' element={<Layout />}>
           {/* Nested Route ini adlah Outlet */}
-          <Route path='/register' element={<UserRegister />} />
-          <Route path='/login' element={<UserLogin />} />
+          <Route path='register' element={<UserRegister />} />
+          <Route path='login' element={<UserLogin />} />
         </Route>
 
         <Route path='/dashboard' element={<DashboardLayout />} >
