@@ -13,6 +13,7 @@ import ContactEdit from './components/contact/ContactEdit'
 import ContactDetail from './components/contact/ContactDetail'
 import AddressCreate from './components/address/AddressCreate'
 import AddressEdit from './components/address/AddressEdit'
+import ProtectedRoute from './components/ProtectedRoute'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -25,7 +26,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='login' element={<UserLogin />} />
         </Route>
 
-        <Route path='/dashboard' element={<DashboardLayout />} >
+        <Route path='/dashboard' element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} >
           <Route path='users'>
             <Route path='profile' element={<UserProfil />} />
             <Route path='logout' element={<UserLogout />} />
