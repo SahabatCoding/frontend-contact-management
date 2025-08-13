@@ -20,7 +20,5 @@ export default function ProtectedRoute({ children }) {
         validasi().then(()=>console.log("berhasil"))
     },[token])
 
-
-
-    return children
+    return token ? children : null
 }
