@@ -7,7 +7,7 @@ export default function UserLogout(){
     const [token,setToken] = useLocalStorage("token", "")
     const navigate = useNavigate()
 
-    async function handleSubmit(e) {       
+    async function handleSubmit() {       
         const response = await userLogout(token)
         const responseBody = await response.json()
 

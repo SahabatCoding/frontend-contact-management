@@ -13,14 +13,14 @@ import ContactEdit from './components/contact/ContactEdit'
 import ContactDetail from './components/contact/ContactDetail'
 import AddressCreate from './components/address/AddressCreate'
 import AddressEdit from './components/address/AddressEdit'
-import ProtectedRoute from './components/ProtectedRoute'
+import { ProtectedRoute, PublicRoute } from './components/routes/AuthRoute'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
 
-        <Route path='/' element={<Layout />}>
+        <Route path='/' element={<PublicRoute><Layout /></PublicRoute>}>
           {/* Nested Route ini adlah Outlet */}
           <Route path='register' element={<UserRegister />} />
           <Route path='login' element={<UserLogin />} />
