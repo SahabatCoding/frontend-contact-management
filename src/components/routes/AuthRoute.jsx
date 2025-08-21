@@ -4,7 +4,7 @@ import { useLocalStorage } from "react-use"
 
 export function ProtectedRoute({ children }) {
 
-    const [token, _] = useLocalStorage("token", "")
+    const [token,_] = useLocalStorage("token", "")
     const navigate = useNavigate()
 
     async function fetch() {

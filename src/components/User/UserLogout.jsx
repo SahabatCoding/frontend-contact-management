@@ -4,7 +4,7 @@ import { useNavigate } from "react-router"
 import { alertError } from "../../lib/alert"
 
 export default function UserLogout(){
-    const [token,setToken] = useLocalStorage("token", "")
+    const [token,_] = useLocalStorage("token", "")
     const navigate = useNavigate()
 
     async function handleSubmit() {       
@@ -12,7 +12,6 @@ export default function UserLogout(){
         const responseBody = await response.json()
 
         if(response.status === 200){
-            setToken("")
             await navigate({
                 pathname : "/login"
             })

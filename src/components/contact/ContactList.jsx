@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useEffectOnce, useLocalStorage } from "react-use";
-import { alertConfirm, alertError, alertSuccess } from "../../lib/alert";
+import { alertConfirm, alertSuccess } from "../../lib/alert";
 import { contactDelete, contactList } from "../../lib/api/ContactApi";
 
 export default function ContactList() {
 
-    const [token, _] = useLocalStorage("token", "")
+    const [token, setToken] = useLocalStorage("token", "")
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
@@ -15,6 +15,7 @@ export default function ContactList() {
     const [totaPages, setTotalPages] = useState(1)
     const [conatcts, setContacts] = useState([]);
     const [reload, setReload] = useState(false)
+    const navigate = useNavigate()
 
     function getPages() {
         const pages = []
@@ -45,11 +46,14 @@ export default function ContactList() {
         const responseBody = await response.json()
         console.log(responseBody)
 
-        if(response.status ===200){
+        if(response.status === 200){
             await alertSuccess("Contact deleted successfully")
             setReload(!reload)
         }else{
-            await alertError(responseBody.errors)
+            setToken("")
+            await navigate({
+                pathname : "/login"
+            })
         }
 
 
@@ -64,7 +68,10 @@ export default function ContactList() {
             setContacts(responseBody.data)
             setTotalPages(responseBody.paging.total_page)
         } else {
-            await alertError(responseBody.errors)
+            setToken("")
+            await navigate({
+                pathname : "/login"
+            })
         }
     }
 

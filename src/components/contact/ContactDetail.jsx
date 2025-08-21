@@ -8,7 +8,7 @@ import { alertConfirm, alertSuccess } from "../../lib/alert";
 export default function ContactDetail() {
 
     const { id } = useParams()
-    const [token, _] = useLocalStorage("token", "")
+    const [token, setToken] = useLocalStorage("token", "")
     const [contact, setContact] = useState("")
     const [addresses, setAddresses] = useState([])
 
@@ -37,6 +37,7 @@ export default function ContactDetail() {
                 setAddresses(responseBody.data)
             }else{
                 await alertError(responseBody.errors)
+                setToken("")
             }
             
         }
@@ -50,6 +51,7 @@ export default function ContactDetail() {
             setContact(responseBody.data)
         } else {
             await alertError(responseBody.errors)
+            setToken("")
         }
     }
     useEffectOnce(() => {
